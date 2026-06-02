@@ -3,14 +3,17 @@ import {
   architectureDocs,
   codeCredibility,
   companyProfile,
+  contactFaqs,
   deliveryProcess,
   documentationAndHandover,
   domainsServed,
   executiveSummary,
   featuredTestimonials,
+  founderNote,
   performanceAndScale,
   productStrategy,
   products,
+  recentWork,
   repositories,
   securityAndReliability,
   services,
@@ -98,6 +101,34 @@ export default function HomeExperience() {
         </div>
       </section>
 
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">Recent Work</div>
+            <h2>Real updates that show the site is active</h2>
+            <p>These are current, visible improvements across products and engineering content already present in the portfolio.</p>
+          </div>
+
+          <div className="feature-grid">
+            {recentWork.map((item) => (
+              <article key={item.title} className="glass-card product-card">
+                <div className="card-meta-row">
+                  <span className="tag">{item.period}</span>
+                </div>
+                <h3 style={{ marginBottom: '0.75rem' }}>{item.title}</h3>
+                <p style={{ marginBottom: '0.85rem' }}>{item.summary}</p>
+                <p style={{ marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                  <strong>Why it matters:</strong> {item.outcome}
+                </p>
+                <Link href={item.href} className="btn-secondary">
+                  {item.ctaLabel}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <div className="section-header">
@@ -155,6 +186,38 @@ export default function HomeExperience() {
 
       <section className="section">
         <div className="container">
+          <div
+            className="glass-card"
+            style={{
+              padding: '2rem',
+              marginBottom: '2rem',
+              display: 'grid',
+              gap: '1.5rem',
+            }}
+          >
+            <div>
+              <div className="section-badge">Founder Note</div>
+              <h2 style={{ marginBottom: '0.75rem' }}>{founderNote.heading}</h2>
+              <p style={{ maxWidth: 840 }}>{founderNote.body}</p>
+            </div>
+            <div style={{ display: 'grid', gap: '0.85rem' }}>
+              {founderNote.focusAreas.map((item) => (
+                <div
+                  key={item}
+                  style={{
+                    padding: '1rem 1.1rem',
+                    border: '1px solid var(--border-primary)',
+                    borderRadius: 'var(--radius-lg)',
+                    background: 'var(--bg-card)',
+                    color: 'var(--text-secondary)',
+                  }}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="section-header">
             <div className="section-badge">Capabilities Preview</div>
             <h2>Engineering capabilities focused on operational software</h2>
@@ -352,6 +415,36 @@ export default function HomeExperience() {
 
       <section className="section final-cta-section">
         <div className="container">
+          <div className="section-header">
+            <div className="section-badge">Contact FAQ</div>
+            <h2>Questions people usually ask before reaching out</h2>
+            <p>Clear answers reduce friction and make the contact step easier without changing the layout much.</p>
+          </div>
+
+          <div className="feature-grid" style={{ marginBottom: '2rem' }}>
+            {contactFaqs.map((item) => (
+              <details
+                key={item.question}
+                className="glass-card product-card"
+                style={{
+                  padding: '1.5rem',
+                }}
+              >
+                <summary
+                  style={{
+                    cursor: 'pointer',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                    listStyle: 'none',
+                  }}
+                >
+                  {item.question}
+                </summary>
+                <p style={{ marginTop: '0.85rem' }}>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+
           <div className="glass-card final-cta-card">
             <div>
               <div className="section-badge">Final CTA</div>
