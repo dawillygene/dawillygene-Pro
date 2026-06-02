@@ -77,6 +77,20 @@ export interface ArchitectureDocRecord {
   highlights: string[];
 }
 
+export interface RecentWorkRecord {
+  title: string;
+  period: string;
+  summary: string;
+  outcome: string;
+  href: string;
+  ctaLabel: string;
+}
+
+export interface FaqRecord {
+  question: string;
+  answer: string;
+}
+
 export const companyProfile = {
   brandName: 'Dawilly Gene',
   studioName: 'GeneLabs Software Tz',
@@ -97,6 +111,17 @@ export const companyProfile = {
   ],
 };
 
+export const founderNote = {
+  heading: 'Why I build this kind of software',
+  body:
+    'I am most useful when a business has outgrown informal workflows and needs a system that can hold real operations together. That usually means approvals, reporting, permissions, reliability, and a product structure that still makes sense after launch.',
+  focusAreas: [
+    'Operational dashboards and internal business systems',
+    'Products that need clear access control and maintainable backend structure',
+    'Delivery work that balances product direction with implementation detail',
+  ],
+};
+
 export const primaryNavigation = [
   { href: '/', label: 'Home' },
   { href: '/products', label: 'Products' },
@@ -112,6 +137,39 @@ export const trustSignals = [
   { label: 'Client websites delivered', value: '3+' },
   { label: 'Open-source packages published', value: '2' },
   { label: 'Industries served', value: '5' },
+];
+
+export const recentWork: RecentWorkRecord[] = [
+  {
+    title: 'Expanded Soko Mtaani portfolio proof',
+    period: '2026',
+    summary:
+      'Added clearer omnichannel product framing across website, Android, and iPhone presence for the Tanzania grocery ordering platform.',
+    outcome:
+      'Visitors can now understand the real delivery surface faster instead of seeing a generic marketplace label.',
+    href: '/products/soko-mtaani',
+    ctaLabel: 'View case study',
+  },
+  {
+    title: 'Shaped Gene Pharmacy POS as a real operations product',
+    period: '2026',
+    summary:
+      'Positioned the product around tenant-aware access, pharmacy registration, inventory direction, and secure dashboard workflows.',
+    outcome:
+      'The product reads as a serious retail operations system rather than only a login screen demo.',
+    href: '/products/gene-pharmacy-pos',
+    ctaLabel: 'Review product',
+  },
+  {
+    title: 'Published architecture and standards sections',
+    period: '2026',
+    summary:
+      'Organized documentation artifacts, engineering standards, and delivery process content into visible sections across the site.',
+    outcome:
+      'Recruiters and clients get proof of engineering thinking without needing inflated claims or fake metrics.',
+    href: '/docs',
+    ctaLabel: 'Open docs',
+  },
 ];
 
 export const executiveSummary = [
@@ -205,6 +263,29 @@ export const codeCredibility = {
     'Use labs and documentation artifacts to show engineering maturity, not just output count',
   ],
 };
+
+export const contactFaqs: FaqRecord[] = [
+  {
+    question: 'Do you build MVPs or production systems?',
+    answer:
+      'Both, but even MVP work is scoped with production realities in mind. I avoid building throwaway flows that become expensive to replace once users depend on them.',
+  },
+  {
+    question: 'Can you maintain or improve a product after launch?',
+    answer:
+      'Yes. Support usually covers iteration, bug fixing, workflow improvements, and tightening weak areas such as permissions, reporting, or performance.',
+  },
+  {
+    question: 'What kind of projects fit you best?',
+    answer:
+      'I fit best on business platforms, admin systems, operational software, role-aware dashboards, and products where reliability matters more than visual novelty.',
+  },
+  {
+    question: 'What should a first message include?',
+    answer:
+      'The current workflow, the bottleneck you want to remove, who will use the system, and any timeline or budget boundary you already know.',
+  },
+];
 
 export const products: ProductRecord[] = [
   {
