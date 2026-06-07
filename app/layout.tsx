@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist_Mono, Playfair_Display } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { AuthProvider } from '@/lib/AuthContext';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -90,6 +91,18 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           crossOrigin="anonymous"
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7M985Y5EYS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-7M985Y5EYS');
+          `}
+        </Script>
         {/* Prevent FOUC - apply theme before render */}
         <script
           dangerouslySetInnerHTML={{
