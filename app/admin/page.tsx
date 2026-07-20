@@ -11,6 +11,7 @@ const cards = [
   { href: '/admin/team', label: 'Team Members', desc: 'Add co-workers & colleagues', icon: 'fa-solid fa-users', color: '#f43f5e' },
   { href: '/admin/testimonials', label: 'Testimonials', desc: 'Manage client reviews', icon: 'fa-solid fa-comments', color: '#6366f1' },
   { href: '/admin/contact', label: 'Contact Info', desc: 'Update email, phone & socials', icon: 'fa-solid fa-envelope', color: '#14b8a6' },
+  { href: '/admin/inquiries', label: 'Inquiries', desc: 'Read messages from the contact form', icon: 'fa-solid fa-inbox', color: '#38bdf8' },
   { href: '/admin/company', label: 'Company Info', desc: 'Update Genelabs Software Tz details', icon: 'fa-solid fa-building', color: '#fb923c' },
 ];
 
