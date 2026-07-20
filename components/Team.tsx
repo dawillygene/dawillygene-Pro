@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { getCollection, COLLECTIONS } from '@/lib/firestore';
 
 interface TeamMember {
@@ -97,7 +98,7 @@ export default function TeamSection() {
                 }}
               >
                 {member.image ? (
-                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                  <Image src={member.image} alt={member.name} width={80} height={80} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
                 ) : (
                   initials(member.name)
                 )}
