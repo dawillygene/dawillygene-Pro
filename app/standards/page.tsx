@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import PageHero from '@/components/site/PageHero';
 import PageShell from '@/components/site/PageShell';
 import { standards } from '@/lib/siteContent';
@@ -28,10 +29,12 @@ export default function StandardsPage() {
                   overflow: 'hidden',
                   border: '1px solid var(--border-primary)',
                 }}>
-                  <img
+                  <Image
                     src={section.image}
                     alt={`${section.title} diagram`}
-                    loading="lazy"
+                    width={1000}
+                    height={600}
+                    sizes="(max-width: 768px) 100vw, 400px"
                     style={{
                       width: '100%',
                       height: 'auto',
