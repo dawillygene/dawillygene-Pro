@@ -109,31 +109,130 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('theme-preference');var d=document.documentElement;if(t==='light'||t==='dark'){d.setAttribute('data-theme',t)}else if(window.matchMedia('(prefers-color-scheme:dark)').matches){d.setAttribute('data-theme','dark')}else{d.setAttribute('data-theme','light')}}catch(e){}})()`,
           }}
         />
-        {/* Schema.org Structured Data */}
+        {/* Schema.org Structured Data — Person + Organization + WebSite graph */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: "Dawilly Gene",
-              alternateName: 'Elia William Mariki',
-              url: 'https://dawillygene.com',
-              jobTitle: 'Software Engineer',
-              worksFor: {
-                '@type': 'Organization',
-                name: 'GeneLabs Software Tz',
-              },
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Dodoma',
-                addressCountry: 'TZ',
-              },
-              sameAs: [
-                'https://github.com/dawillygene',
-                'https://www.linkedin.com/in/elia-william-mariki/',
-                'https://www.instagram.com/dawillygene/',
-                'https://www.tiktok.com/@dawilly_gene',
+              '@graph': [
+                {
+                  '@type': 'Person',
+                  '@id': 'https://dawillygene.com/#person',
+                  name: 'Elia William Mariki',
+                  alternateName: ['Dawilly Gene', 'dawillygene', 'Elia Mariki'],
+                  givenName: 'Elia',
+                  familyName: 'Mariki',
+                  additionalName: 'William',
+                  url: 'https://dawillygene.com',
+                  mainEntityOfPage: 'https://dawillygene.com/about',
+                  image: 'https://dawillygene.com/logo.jpeg',
+                  jobTitle: [
+                    'Software Engineer',
+                    'IoT Engineer',
+                    'Systems Software Engineer',
+                    'Backend Developer',
+                  ],
+                  description:
+                    'Elia William Mariki (dawillygene) is a Tanzanian systems software engineer, IoT engineer, and backend developer based in Dar es Salaam and Dodoma. He is the founder of GeneLabs Software Tz, a backend engineer for Soko Mtaani, and an IT consultant for Alpha Employment Agency & Consultant. He builds secure, scalable digital products, IoT systems, and business platforms for real operations.',
+                  disambiguatingDescription:
+                    'Tanzanian software engineer and IoT engineer known online by the developer alias dawillygene.',
+                  hasOccupation: [
+                    {
+                      '@type': 'Occupation',
+                      name: 'Software Engineer',
+                      occupationalCategory: '15-1252.00',
+                    },
+                    {
+                      '@type': 'Occupation',
+                      name: 'IoT Engineer',
+                      occupationalCategory: '17-2072.00',
+                    },
+                  ],
+                  nationality: { '@type': 'Country', name: 'Tanzania' },
+                  homeLocation: [
+                    { '@type': 'Place', name: 'Dar es Salaam, Tanzania' },
+                    { '@type': 'Place', name: 'Dodoma, Tanzania' },
+                  ],
+                  alumniOf: {
+                    '@type': 'CollegeOrUniversity',
+                    name: 'University of Dodoma',
+                    department: 'School of Computer Science and Software Engineering',
+                    sameAs: 'https://www.udom.ac.tz/',
+                  },
+                  knowsAbout: [
+                    'Software Engineering',
+                    'Internet of Things (IoT)',
+                    'IoT Engineering',
+                    'Embedded Systems',
+                    'Backend Development',
+                    'Backend API Engineering',
+                    'Product Engineering',
+                    'Multi-tenant Application Security',
+                    'Next.js',
+                    'TypeScript',
+                    'Firebase',
+                    'Admin Dashboard Systems',
+                    'Business Management Platforms',
+                    'Engineering Standards',
+                  ],
+                  worksFor: [
+                    { '@id': 'https://dawillygene.com/#organization' },
+                    { '@type': 'Organization', name: 'Soko Mtaani' },
+                    { '@type': 'Organization', name: 'Alpha Employment Agency & Consultant' },
+                  ],
+                  founder: { '@id': 'https://dawillygene.com/#organization' },
+                  address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Dodoma',
+                    addressCountry: 'TZ',
+                  },
+                  sameAs: [
+                    'https://github.com/dawillygene',
+                    'https://www.linkedin.com/in/elia-william-mariki/',
+                    'https://www.instagram.com/dawillygene/',
+                    'https://www.tiktok.com/@dawilly_gene',
+                    'https://www.youtube.com/@dawillygene',
+                  ],
+                },
+                {
+                  '@type': 'Organization',
+                  '@id': 'https://dawillygene.com/#organization',
+                  name: 'GeneLabs Software Tz',
+                  alternateName: 'Genelabs Software Tz',
+                  url: 'https://dawillygene.com',
+                  logo: 'https://dawillygene.com/logo.jpeg',
+                  founder: { '@id': 'https://dawillygene.com/#person' },
+                  foundingLocation: {
+                    '@type': 'Place',
+                    address: {
+                      '@type': 'PostalAddress',
+                      addressLocality: 'Dodoma',
+                      addressCountry: 'TZ',
+                    },
+                  },
+                  areaServed: 'Worldwide',
+                  sameAs: ['https://github.com/dawillygene'],
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://dawillygene.com/#website',
+                  url: 'https://dawillygene.com',
+                  name: 'Dawilly Gene — Elia William Mariki',
+                  description:
+                    'Product engineering portfolio of Elia William Mariki (dawillygene), founder of GeneLabs Software Tz.',
+                  publisher: { '@id': 'https://dawillygene.com/#person' },
+                  inLanguage: 'en',
+                  potentialAction: {
+                    '@type': 'SearchAction',
+                    target: {
+                      '@type': 'EntryPoint',
+                      urlTemplate:
+                        'https://dawillygene.com/blog?q={search_term_string}',
+                    },
+                    'query-input': 'required name=search_term_string',
+                  },
+                },
               ],
             }),
           }}
@@ -152,7 +251,7 @@ export default function RootLayout({
           whiteSpace: 'nowrap',
           border: '0',
         }}>
-          Website developed and maintained by Elia William Mariki (dawillygene), a systems software engineer based in Dodoma, Tanzania.
+          Website developed and maintained by Elia William Mariki (dawillygene), a Tanzanian systems software engineer and IoT engineer based in Dar es Salaam and Dodoma, and founder of GeneLabs Software Tz.
         </span>
         <ThemeProvider>
           <FadeInObserver />
