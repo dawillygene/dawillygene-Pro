@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Storage rules for dawillygene.com — uploaded images (project/team/hero art)
+// are publicly readable, but only the admin account may upload or delete, and
+// uploads are capped at 5 MB and must be images.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'admin@dawillygene.com';
+    }
+
+    match /{allPaths=**} {
+      allow read;
+      allow write: if isAdmin()
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
