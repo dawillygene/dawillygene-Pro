@@ -1,24 +1,40 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import { addDocument, COLLECTIONS } from '@/lib/firestore';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }, []);
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
+    setError('');
     const { name, email, subject, message } = formData;
-    const body = `Hi Dawilly,%0D%0A%0D%0AMy name is ${encodeURIComponent(name)} (${encodeURIComponent(email)}).%0D%0A%0D%0A${encodeURIComponent(message)}%0D%0A%0D%0ABest regards,%0D%0A${encodeURIComponent(name)}`;
-    const mailto = `mailto:dawillygene@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    window.open(mailto, '_blank');
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setSending(true);
+    try {
+      // Persist the inquiry to Firestore so no lead is lost to a missing mail client.
+      await addDocument(COLLECTIONS.CONTACT_INQUIRIES, {
+        name: name.trim(),
+        email: email.trim(),
+        subject: subject.trim(),
+        message: message.trim(),
+      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 6000);
+    } catch {
+      setError('Something went wrong sending your message. Please email dawillygene@gmail.com directly.');
+    } finally {
+      setSending(false);
+    }
   }, [formData]);
 
   const inputStyle = {
@@ -140,7 +156,16 @@ const Contact = () => {
                   <path d="M22 11.08V12a10 10 0 11-5.93-9.14" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M22 4L12 14.01l-3-3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                Your email client should have opened. If not, email me directly at dawillygene@gmail.com
+                Thanks! Your message has been received — I&apos;ll get back to you shortly.
+              </div>
+            )}
+            {error && (
+              <div style={{
+                padding: '0.85rem 1.2rem', borderRadius: 'var(--radius-md)',
+                background: 'rgba(244, 63, 94, 0.1)', border: '1px solid rgba(244, 63, 94, 0.3)',
+                color: '#f43f5e', fontSize: '.85rem', fontWeight: 600, marginBottom: '1rem',
+              }}>
+                {error}
               </div>
             )}
             <form onSubmit={handleSubmit}>
@@ -163,8 +188,8 @@ const Contact = () => {
                 style={{ ...inputStyle, marginBottom: '1rem', resize: 'vertical', minHeight: 140 }}
                 onFocus={handleFocus} onBlur={handleBlur}
               />
-              <button type="submit" className="btn-primary">
-                Send Message
+              <button type="submit" className="btn-primary" disabled={sending} style={sending ? { opacity: 0.6, cursor: 'not-allowed' } : undefined}>
+                {sending ? 'Sending…' : 'Send Message'}
                 <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
