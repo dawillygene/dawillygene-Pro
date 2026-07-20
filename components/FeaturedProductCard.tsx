@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { ProductRecord } from '@/lib/siteContent';
 
 interface FeaturedProductCardProps {
@@ -142,10 +143,13 @@ export default function FeaturedProductCard({ product, index }: FeaturedProductC
 
         {/* The floating product image */}
         <div className="fp-float-wrapper" style={{ position: 'relative', zIndex: 2 }}>
-          <img
+          <Image
             src={product.image}
             alt={product.imageAlt}
-            loading="lazy"
+            width={680}
+            height={820}
+            sizes="(max-width: 768px) 260px, 340px"
+            priority={index === 0}
             style={{
               maxWidth: product.slug === 'gene-pharmacy-pos' ? 340 : 260,
               width: '100%',
