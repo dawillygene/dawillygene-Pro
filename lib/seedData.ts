@@ -1,8 +1,7 @@
-// Run once from admin to seed initial data into Firestore
 import { setDocument, addDocument, COLLECTIONS } from '@/lib/firestore';
 
 export async function seedDefaultData() {
-  // Company / Hero
+ 
   await setDocument(COLLECTIONS.COMPANY, 'main', {
     name: 'Genelabs Software Tz',
     founder: 'Dawilly Gene',
@@ -46,7 +45,7 @@ export async function seedDefaultData() {
   // Default team (Dawilly as founder)
   await addDocument(COLLECTIONS.TEAM, {
     name: 'Dawilly Gene',
-    realName: 'Elia William Mariki',
+    realName: 'ELIA WILLIAM MARIKI',
     role: 'Founder & Lead Software Engineer',
     email: 'dawillygene@gmail.com',
     phone: '+255 753 225 961',
