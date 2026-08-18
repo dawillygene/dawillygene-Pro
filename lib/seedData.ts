@@ -62,5 +62,5 @@ export async function seedDefaultData() {
     published: true,
   });
 
-  console.log('[OK] Default data seeded successfully.');
+  console.log('Default data seeded successfully.');
 }
